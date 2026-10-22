@@ -13,6 +13,8 @@
         <div class="navbar-nav">
             <a class="nav-link {{ request()->routeIs('cars.*') ? 'active' : '' }}"
                href="{{ route('cars.index') }}">Автомобілі</a>
+            <a class="nav-link {{ request()->routeIs('countries.*') ? 'active' : '' }}"
+               href="{{ route('countries.index') }}">Країни</a>
         </div>
     </div>
 </nav>
