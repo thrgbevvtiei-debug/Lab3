@@ -1,6 +1,6 @@
 @php
-    $fuelTypes = ['Бензин', 'Дизель', 'Гібрид', 'Електро'];
-    $transmissions = ['Механіка', 'Автомат'];
+    $fuelTypes = \App\Enums\FuelType::cases();
+    $transmissions = \App\Enums\Transmission::cases();
 @endphp
 
 <div class="mb-3">
@@ -43,7 +43,7 @@
     <select id="fuel_type" name="fuel_type" class="form-select">
         <option value="">— оберіть —</option>
         @foreach ($fuelTypes as $f)
-            <option value="{{ $f }}" @selected(old('fuel_type', $car->fuel_type ?? '') === $f)>{{ $f }}</option>
+            <option value="{{ $f->value }}" @selected(old('fuel_type', isset($car->fuel_type) ? $car->fuel_type->value : '') === $f->value)>{{ $f->value }}</option>
         @endforeach
     </select>
     @error('fuel_type') <p class="text-danger small mb-0">{{ $message }}</p> @enderror
@@ -54,7 +54,7 @@
     <select id="transmission" name="transmission" class="form-select">
         <option value="">— оберіть —</option>
         @foreach ($transmissions as $t)
-            <option value="{{ $t }}" @selected(old('transmission', $car->transmission ?? '') === $t)>{{ $t }}</option>
+            <option value="{{ $t->value }}" @selected(old('transmission', isset($car->transmission) ? $car->transmission->value : '') === $t->value)>{{ $t->value }}</option>
         @endforeach
     </select>
     @error('transmission') <p class="text-danger small mb-0">{{ $message }}</p> @enderror
@@ -65,4 +65,4 @@
     <input id="color" name="color" type="text" class="form-control"
            value="{{ old('color', $car->color ?? '') }}">
     @error('color') <p class="text-danger small mb-0">{{ $message }}</p> @enderror
-</div>І
+</div>

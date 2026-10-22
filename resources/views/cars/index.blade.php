@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="h3 mb-0">Автомобілі в наявності</h1>
+        <h1 class="h3">Автомобілі в наявності</h1>
         <a href="{{ route('cars.create') }}" class="btn btn-primary">+ Додати авто</a>
     </div>
 
@@ -19,14 +19,14 @@
         </div>
         <div class="col-auto">
             <button type="submit" class="btn btn-secondary">Фільтрувати</button>
-            @if (request()->filled('brand'))
+            @if (request('brand'))
                 <a href="{{ route('cars.index') }}" class="btn btn-outline-secondary">Скинути</a>
             @endif
         </div>
     </form>
 
     <div class="table-responsive">
-        <table class="table table-striped table-hover align-middle border">
+        <table class="table table-dark-header table-striped table-hover align-middle border">
             <thead class="table-dark">
             <tr>
                 <th>#</th>
@@ -41,9 +41,9 @@
             </tr>
             </thead>
             <tbody>
-            @forelse ($cars as $i => $car)
+            @forelse ($cars as $car)
                 <tr>
-                    <td>{{ $cars->firstItem() + $i }}</td>
+                    <td>{{ $cars->firstItem() + $loop->index }}</td>
                     <td>{{ $car->brand }}</td>
                     <td>
                         <a href="{{ route('cars.show', $car) }}" class="fw-bold text-decoration-none">
@@ -51,10 +51,10 @@
                         </a>
                     </td>
                     <td>{{ $car->year }}</td>
-                    <td>{{ number_format($car->price, 0, ',', ' ') }}</td>
-                    <td>{{ number_format($car->mileage, 0, ',', ' ') }}</td>
-                    <td>{{ $car->fuel_type }}</td>
-                    <td>{{ $car->transmission }}</td>
+                    <td>{{ number_format($car->price, 0, '.', ' ') }}</td>
+                    <td>{{ number_format($car->mileage, 0, '.', ' ') }}</td>
+                    <td>{{ $car->fuel_type->value }}</td>
+                    <td>{{ $car->transmission->value }}</td>
                     <td>
                         <a href="{{ route('cars.edit', $car) }}" class="btn btn-sm btn-outline-primary">Редагувати</a>
                     </td>
