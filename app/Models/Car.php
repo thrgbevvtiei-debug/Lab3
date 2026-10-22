@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\FuelType;
+use App\Enums\Transmission;
 use Illuminate\Database\Eloquent\Model;
 
 class Car extends Model
@@ -18,8 +20,10 @@ class Car extends Model
     ];
 
     protected $casts = [
-        'year'    => 'integer',
-        'price'   => 'decimal:2',
-        'mileage' => 'integer',
+        'year'         => 'integer',
+        'price'        => 'decimal:2',
+        'mileage'      => 'integer',
+        'fuel_type'    => FuelType::class,
+        'transmission' => Transmission::class,
     ];
 }
